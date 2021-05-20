@@ -16,7 +16,7 @@ it needs application keys (choose type 'script').
 
 ## Usage
 
-Running Python 3.8:
+Running Python 3.9:
 
     $ pip install -r requirements.txt
     $ python reddit_transfer.py <old_username> <new_username>
