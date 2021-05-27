@@ -17,3 +17,8 @@ Running Python 3.9:
     python reddit_transfer.py login $NEW_USERNAME
     python reddit_transfer.py transfer $OLD_USERNAME $NEW_USERNAME
 
+## Caveats
+
+MFA authentication may be broken. You can authenticate successfully if MFA is
+disabled.
+
