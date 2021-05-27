@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.9
 """
-Transfer reddit subscriptions, saved posts/comments, friends, and
-settings from one account to another.
+Transfer reddit subscriptions, saved submissions/comments, friends,
+and preferences from one account to another.
 """
 import argparse
 import collections
@@ -99,13 +99,10 @@ class User:
 
     @functools.cached_property
     def saved(self) -> Set[str]:
-        log.info('Fetching saved comments/posts for /u/%s', self.username)
+        log.info('Fetching saved comments/submissions for /u/%s', self.username)
         return {item for item in self.reddit.user.me().saved(limit=None)}
 
 
-# To be precise, the behavior implemented is closer to synchronization than
-# just transferring data, but there's a (great) client named 'reddit sync'
-# and I'd prefer to avoid publicly overloading that term.
 def sync_data(src_user: str, dst_user: str) -> None:
     src = User(src_user)
     dst = User(dst_user)
@@ -151,6 +148,9 @@ def sync_data(src_user: str, dst_user: str) -> None:
 
     log.info(f"Copy preferences from {dst_user}")
     dst.reddit.user.preferences.update(**src.reddit.user.preferences())
+    import pprint
+    pprint.pprint(src.reddit.user.preferences())
+    pprint.pprint(dst.reddit.user.preferences())
 
 
 def main(argv: Sequence[str]):
