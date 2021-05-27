@@ -27,9 +27,9 @@ def prompt(question: str,
     answer = input(f'{question}{suggest}{option}: ')
     if answer:
         return answer
-    elif optional and suggestion is not None:
+    elif suggestion:
         return suggestion
-    elif optional and suggestion is None:
+    elif optional:
         return None
     else:
         raise ValueError(f'{question} is required')
