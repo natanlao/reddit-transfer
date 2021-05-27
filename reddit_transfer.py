@@ -41,13 +41,14 @@ class Config:
         # praw.Reddit exposes a config management interface but we can't use
         # it without authenticating
         self.username = username
+        self.config_file = config_file
         self.config = configparser.ConfigParser()
         self.config.read(config_file)
 
     def write(self):
-        with open(config_file, 'w') as fp:
+        with open(self.config_file, 'w') as fp:
             self.config.write(fp)
-        log.info('Credentials saved to %r', config_file)
+        log.info('Credentials saved to %r', self.config_file)
 
     def read(self) -> Mapping:
         return self.config[self.username]
@@ -58,7 +59,7 @@ class Config:
         """
         client_id = self.config.get(self.username, 'client_id', fallback=None)
         client_secret = self.config.get(self.username, 'client_secret', fallback=None)
-        self.config[username] = {
+        self.config[self.username] = {
             'username': self.username,
             'client_id': prompt('Client ID', client_id),
             'client_secret': prompt('Client secret', client_secret)
