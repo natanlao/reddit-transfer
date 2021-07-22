@@ -15,7 +15,16 @@ preferences (e.g., those related to profiles) can't be controlled by the API.
 investigated it thoroughly.)
 
 The script can handle accounts with two-factor authentication, too. Either way,
-it needs application keys (choose type 'script').
+it needs application keys:
+
+1. Open the [Third-Party Authorizations page](https://www.reddit.com/prefs/apps)
+   when logged in to your Reddit account.
+
+2. Click the `create an app...` button. Choose type `script`, any name, and any
+   redirect URL.
+
+3. Provide the provided client ID (in bold under the name you chose) and secret
+   to `python reddit_transfer.py login $USERNAME`.
 
 ## Usage
 
