@@ -15,7 +15,7 @@ preferences (e.g., those related to profiles) can't be controlled by the API.
 investigated it thoroughly.)
 
 The script can handle accounts with two-factor authentication, too. Either way,
-it needs application keys:
+you need application keys. For each account:
 
 1. Open the [Third-Party Authorizations page](https://www.reddit.com/prefs/apps)
    when logged in to your Reddit account.
