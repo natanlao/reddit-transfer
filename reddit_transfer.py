@@ -140,9 +140,9 @@ def sync_data(src_user: str, dst_user: str) -> None:
     for thing in src.saved - dst.saved:
         log.info('Save %r', thing)
         if isinstance(thing, praw.models.Submission):
-            dst.reddit.submission(thing).save()
+            dst.reddit.submission(thing.id).save()
         elif isinstance(thing, praw.models.Comment):
-            dst.reddit.comment(thing).save()
+            dst.reddit.comment(thing.id).save()
         else:
             raise RuntimeError('unexpected object type')
 
