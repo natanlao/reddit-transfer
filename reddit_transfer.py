@@ -72,12 +72,12 @@ class User:
     def __init__(self, username: str):
         self.username = username
         password = self.prompt_password()
-        config = Config(username)
+        self.config = Config(username)
         try:
             self.reddit = praw.Reddit(username,
                                       password=password,
                                       user_agent=user_agent,
-                                      **config.read())
+                                      **self.config.read())
         except configparser.NoSectionError:
             raise RuntimeError(f'Did you run `{sys.argv[0]} login {username}?')
 
@@ -106,6 +106,10 @@ class User:
 def sync_data(src_user: str, dst_user: str) -> None:
     src = User(src_user)
     dst = User(dst_user)
+
+    # TODO: Leaky abstraction
+    if src.config.read()['client_id'] == dst.config.read()['client_id']:
+        raise ValueError('You must generate one set of keys per account')
 
     # Since these are bulk operations, we could just unsubscribe from all
     # then resubscribe as needed but I've found that there's some lag between
