@@ -9,6 +9,7 @@ import configparser
 import functools
 import getpass
 import logging
+import pprint
 import sys
 from typing import Mapping, Optional, Set, Sequence
 
@@ -152,7 +153,6 @@ def sync_data(src_user: str, dst_user: str) -> None:
 
     log.info(f"Copy preferences from {dst_user}")
     dst.reddit.user.preferences.update(**src.reddit.user.preferences())
-    import pprint
     pprint.pprint(src.reddit.user.preferences())
     pprint.pprint(dst.reddit.user.preferences())
 
